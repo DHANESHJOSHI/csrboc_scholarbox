@@ -85,7 +85,7 @@ function App() {
             <div className="md:hidden">
               <button
                 onClick={toggleMenu}
-                className="text-gray-600 hover:text-blue-600"
+                className="text-gray-600 hover:text-[#BADEA5]"
               >
                 {isMenuOpen ? (
                   <X className="h-6 w-6" />
@@ -105,7 +105,7 @@ function App() {
                 <li key={item.name} className="text-sm">
                   <a
                     href={item.href}
-                    className="block py-3 px-4 md:py-0 md:px-0 text-gray-600 hover:text-blue-600 font-medium transition-colors duration-200"
+                    className="block py-3 px-4 md:py-0 md:px-0 text-gray-600 hover:text-[#BADEA5] font-medium transition-colors duration-200"
                   >
                     {item.name}
                   </a>
