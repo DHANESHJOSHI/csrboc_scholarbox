@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Mail, AlertCircle, CheckCircle2, Share2, FileText } from 'lucide-react';
+import { X, Mail, AlertCircle, CheckCircle2, Share2, FileText, Menu } from 'lucide-react';
 
 interface Scholarship {
   id: string;
@@ -60,29 +60,52 @@ function App() {
     setShowResult(true);
   };
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev);
+  };
+
   return (
     <div className="min-h-screen bg-[#001B3D]">
       {/* Header */}
       <header className="bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Logo Section */}
-          
-          {/* Navigation */}
           <nav className="flex items-center justify-between py-4">
-            <div className="flex items-center space-x-9">
-              <img 
-                src="https://hyundai.scholarsbox.in/uploads/HMIF%20LOGO-1.jpg" 
-                alt="Hyundai Logo" 
+            {/* Logo */}
+            <div className="flex items-center space-x-4">
+              <img
+                src="https://hyundai.scholarsbox.in/uploads/HMIF%20LOGO-1.jpg"
+                alt="Hyundai Logo"
                 className="h-12"
               />
             </div>
 
-            <ul className="flex space-x-8 ml-10"> {/* Added `ml-10` for spacing */}
+            {/* Hamburger Icon for small screens */}
+            <div className="md:hidden">
+              <button
+                onClick={toggleMenu}
+                className="text-gray-600 hover:text-blue-600"
+              >
+                {isMenuOpen ? (
+                  <X className="h-6 w-6" />
+                ) : (
+                  <Menu className="h-6 w-6" />
+                )}
+              </button>
+            </div>
+
+            {/* Navbar Links */}
+            <ul
+              className={`${
+                isMenuOpen ? 'block' : 'hidden'
+              } absolute md:relative bg-white top-16 left-0 w-full md:w-auto md:flex md:space-x-6 md:items-center md:top-auto md:left-auto z-50 shadow-md md:shadow-none`}
+            >
               {navItems.map((item) => (
-                <li key={item.name}>
+                <li key={item.name} className="text-sm">
                   <a
                     href={item.href}
-                    className="text-gray-600 hover:text-blue-600 font-medium text-sm transition-colors duration-200"
+                    className="block py-3 px-4 md:py-0 md:px-0 text-gray-600 hover:text-blue-600 font-medium transition-colors duration-200"
                   >
                     {item.name}
                   </a>
@@ -95,8 +118,8 @@ function App() {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 className="text-4xl font-bold text-white text-center mb-12">Scholarships</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <h1 className="text-3xl md:text-4xl font-bold text-white text-center mb-12">Scholarships</h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {scholarships.map((scholarship) => (
             <div
               key={scholarship.id}
@@ -107,20 +130,20 @@ function App() {
                   <img 
                     src="https://hyundai.scholarsbox.in/uploads/HMIF%20LOGO-1.jpg" 
                     alt="Hyundai Logo Combined" 
-                    className="h-24"
+                    className="h-20 sm:h-24"
                   />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-4">
                   {scholarship.title}
                 </h3>
-                <div className="space-y-2 mb-6">
+                {/* <div className="space-y-2 mb-6">
                   <div className="flex items-center text-sm text-gray-600">
                     <span>Published Date: {scholarship.publishedDate}</span>
                   </div>
                   <div className="flex items-center text-sm text-gray-600">
                     <span>End Date: {scholarship.endDate}</span>
                   </div>
-                </div>
+                </div> */}
                 <div className="flex items-center justify-between">
                   <button
                     onClick={() => {}}
@@ -130,7 +153,7 @@ function App() {
                   </button>
                   <button
                     onClick={() => handleCheckResult(scholarship)}
-                    className="bg-[#001B3D] text-white px-6 py-2 rounded hover:bg-blue-900 transition-colors duration-200"
+                    className="bg-[#001B3D] text-white px-4 py-2 text-sm rounded hover:bg-blue-900 transition-colors duration-200"
                   >
                     Result
                   </button>
